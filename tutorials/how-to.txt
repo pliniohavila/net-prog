@@ -1,0 +1,21 @@
+1. Escreva o código
+2. Execute
+3. Estude o, entenda o basicamente o que faz, explicação básica
+4. Refatore-o, se for preciso
+5. Faça Fuzzy: teste parâmetros, induza erros
+6. Estude a nível de kernel
+7. Estude a nível de rede
+8. https://claude.ai/chat/d95a6f8c-2138-4495-a1ee-e35df32b4c60
+
+1. O que o código faz?
+2. O que o kernel faz internamente?
+3. O que aparece na rede?
+4. Como eu observaria ou investigaria isso em um ambiente real?
+
+Rede:
+netstat; ss -lnp, -tulp, -lnt; tcpdump, wireshark
+
+Kernel:
+lsof -i; strace, strace -e trace=network/ ltrace
+
+https://sergioprado.org/analisando-aplicacoes-linux-com-strace-e-ltrace/ 
