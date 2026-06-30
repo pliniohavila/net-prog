@@ -14,8 +14,28 @@
 
 Rede:
 netstat; ss -lnp, -tulp, -lnt; tcpdump, wireshark
+Ver o conteúdo de texto: sudo tcpdump -i lo -nn -A tcp port 8000
+Ver o conteúdo binário: 
+    Hexdecimal e ASCII: sudo tcpdump -i lo -nn -X tcp port 8000
+    Hexdecimal: sudo tcpdump -i lo -nn -x tcp port 8000
 
 Kernel:
 lsof -i; strace, strace -e trace=network/ ltrace
 
+
+Terminal 1: ./server
+Terminal 2: strace -e trace=network -p <PID_DO_SERVIDOR>
+Terminal 3: sudo tcpdump -i lo -nn tcp port 8000
+Terminal 4: watch 'lsof -iTCP:8000'
+Terminal 5: watch 'ss -tanp | grep 8000'
+
+Cada ferramenta responde a uma pergunta diferente:
+
+strace → Quais chamadas de sistema meu programa executou? (socket(), accept(), recv(), close())
+tcpdump → Quais pacotes essas chamadas geraram na rede? (SYN, ACK, PSH, FIN)
+lsof → Quais sockets (descritores de arquivo) o processo mantém abertos?
+ss → Em que estado estão as conexões TCP? (LISTEN, ESTABLISHED, TIME_WAIT)
+
 https://sergioprado.org/analisando-aplicacoes-linux-com-strace-e-ltrace/ 
+
+https://franckpachot.medium.com/network-troubleshooting-with-tcpdump-and-strace-73e74dc727ee
